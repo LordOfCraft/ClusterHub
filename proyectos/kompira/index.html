@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base target="_self">
+    <title>Kompira Maru | Festival Musical por la Paz</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@preline/preline@2.0.0/dist/preline.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Pacifico&display=swap');
+        
+        :root {
+            --white: #F8F9FA;
+            --purple: #6A4C93;
+            --red: #D62839;
+            --green: #5E8C61;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--white);
+            color: #333;
+            overflow-x: hidden;
+        }
+        
+        .hero-bg {
+            background: linear-gradient(rgba(248, 249, 250, 0.7), rgba(248, 249, 250, 0.9)), 
+                        url('./primeraimagen.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        .river-section {
+            background: linear-gradient(rgba(106, 76, 147, 0.1), rgba(106, 76, 147, 0.2)), 
+                        url('./RioMagdalena.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        .diagnostic-section {
+            background-color: var(--white);
+        }
+        
+        .methodology-section {
+            background-color: var(--green);
+            background-image: url('./ff.png');
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay;
+        }
+        
+        .night-section {
+            background: linear-gradient(to bottom, #1A1A2E, #16213E);
+            color: var(--white);
+        }
+        
+        .title-font {
+            font-family: 'Pacifico', cursive;
+        }
+        
+        .floating {
+            animation: floating 6s ease-in-out infinite;
+        }
+        
+        .floating-slow {
+            animation: floating 8s ease-in-out infinite;
+        }
+        
+        .floating-fast {
+            animation: floating 4s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .leaf {
+            position: absolute;
+            opacity: 0.7;
+            animation: falling linear infinite;
+        }
+        
+        @keyframes falling {
+            0% {
+                top: -10%;
+                transform: translateX(0) rotate(0deg);
+            }
+            100% {
+                top: 110%;
+                transform: translateX(100px) rotate(360deg);
+            }
+        }
+        
+        .music-note {
+            position: absolute;
+            animation: floatNote linear infinite;
+        }
+        
+        @keyframes floatNote {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        .transition-section {
+            height: 200px;
+            background: linear-gradient(to bottom, var(--white), var(--green));
+        }
+        
+        .transition-night {
+            height: 200px;
+            background: linear-gradient(to bottom, var(--green), #16213E);
+        }
+        
+        .phase-card {
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+        }
+        
+        .phase-card:hover {
+            transform: translateY(-10px) rotateX(5deg);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+        }
+        
+        .animal-spotlight {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .animal-spotlight::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle, transparent 30%, rgba(0,0,0,0.7) 150%);
+            pointer-events: none;
+        }
+        
+        .scroll-indicator {
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-20px);}
+            60% {transform: translateY(-10px);}
+        }
+        
+        .fade-in {
+            animation: fadeIn 1.5s ease-in forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .delayed-1 {
+            animation-delay: 0.3s;
+        }
+        
+        .delayed-2 {
+            animation-delay: 0.6s;
+        }
+        
+        .delayed-3 {
+            animation-delay: 0.9s;
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating elements (leaves, music notes) -->
+    <div id="floating-elements"></div>
+    
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <a href="#" class="text-xl font-bold text-purple-600" onclick="navigate(event, 'home')">
+                    <span class="title-font">Kompira Maru</span>
+                </a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#" class="text-gray-700 hover:text-purple-600 transition" onclick="navigate(event, 'diagnostic')">Diagnóstico</a>
+                    <a href="#" class="text-gray-700 hover:text-purple-600 transition" onclick="navigate(event, 'methodology')">Metodología</a>
+                    <a href="#" class="text-gray-700 hover:text-purple-600 transition" onclick="navigate(event, 'night')">Festival</a>
+                    <a href="#" class="px-4 py-2 bg-red-500 text-white rounded-full hover:bg-red-600 transition" onclick="navigate(event, 'contact')">Participa</a>
+                </div>
+                <button class="md:hidden text-gray-700" onclick="toggleMenu()">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white py-4 px-4 shadow-lg">
+            <a href="#" class="block py-2 text-gray-700 hover:text-purple-600" onclick="navigate(event, 'diagnostic')">Diagnóstico</a>
+            <a href="#" class="block py-2 text-gray-700 hover:text-purple-600" onclick="navigate(event, 'methodology')">Metodología</a>
+            <a href="#" class="block py-2 text-gray-700 hover:text-purple-600" onclick="navigate(event, 'night')">Festival</a>
+            <a href="#" class="block py-2 px-4 bg-red-500 text-white rounded-full hover:bg-red-600 transition w-max mt-2" onclick="navigate(event, 'contact')">Participa</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-bg min-h-screen flex items-center justify-center relative overflow-hidden pt-16">
+        <div class="absolute inset-0 overflow-hidden">
+            <!-- Animated river elements would be added here with JavaScript -->
+        </div>
+        
+        <div class="max-w-4xl mx-auto px-6 text-center z-10">
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 title-font text-purple-700 fade-in">
+                Festival Musical por la Paz
+            </h1>
+            <h2 class="text-2xl md:text-3xl font-light mb-8 text-gray-700 fade-in delayed-1">
+                Una voz desde el río, una red desde la resistencia
+            </h2>
+            <p class="text-lg md:text-xl mb-10 text-gray-600 fade-in delayed-2">
+                Kompira Maru es un movimiento cultural que navega por las aguas del Magdalena Medio, tejiendo redes de esperanza a través de la música y el arte comunitario.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4 fade-in delayed-3">
+                <a href="#" class="px-8 py-3 bg-purple-600 text-white rounded-full hover:bg-purple-700 transition transform hover:scale-105" onclick="navigate(event, 'diagnostic')">
+                    Conoce nuestro viaje
+                </a>
+                <a href="#" class="px-8 py-3 border-2 border-purple-600 text-purple-600 rounded-full hover:bg-purple-50 transition transform hover:scale-105" onclick="navigate(event, 'night')">
+                    Vive el festival
+                </a>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-10 left-0 right-0 text-center scroll-indicator">
+            <i class="fas fa-chevron-down text-2xl text-purple-600 animate-bounce"></i>
+        </div>
+    </section>
+
+    <!-- River Transition -->
+    <div class="river-section h-32 md:h-48"></div>
+
+    <!-- Diagnostic Section -->
+    <section id="diagnostic" class="diagnostic-section py-20 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-purple-700">El Río que Nos Une</h2>
+                <div class="w-24 h-1 bg-red-500 mx-auto mb-6"></div>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    En las aguas del Magdalena Medio confluyen historias de resistencia, abandono y una riqueza cultural que fluye como el río.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h3 class="text-2xl font-bold mb-6 text-green-700">Contexto del Territorio</h3>
+                    <p class="text-gray-700 mb-6">
+                        El Magdalena Medio, región bañada por el río Magdalena, ha sido escenario de conflicto armado, abandono estatal y desigualdad social. Sin embargo, en sus riberas florece una cultura vibrante, resiliente y llena de esperanza.
+                    </p>
+                    <p class="text-gray-700 mb-6">
+                        Las comunidades afrodescendientes, indígenas y campesinas han preservado tradiciones musicales únicas, donde el bullerengue, la cumbia y los cantos de trabajo se mezclan con expresiones urbanas contemporáneas.
+                    </p>
+                    <div class="bg-purple-100 border-l-4 border-purple-500 p-4 mb-6">
+                        <p class="text-purple-700 font-medium">
+                            "El río no es solo agua que pasa, es memoria que fluye y canta. En sus remansos guardamos las historias que nos hacen libres."
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="animal-spotlight rounded-xl overflow-hidden shadow-xl">
+                    <img src="https://images.unsplash.com/photo-1579445710183-f9a816f5da1a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Iguana del Magdalena" class="w-full h-auto">
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
+                        <p class="text-white font-medium">La iguana, guardiana de nuestros territorios</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-red-500">
+                    <div class="text-red-500 text-3xl mb-4">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <h4 class="font-bold mb-2 text-lg">Desafíos</h4>
+                    <p class="text-gray-600">
+                        Violencia estructural, falta de acceso a educación artística, migración forzada de jóvenes y pérdida de tradiciones culturales.
+                    </p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-purple-500">
+                    <div class="text-purple-500 text-3xl mb-4">
+                        <i class="fas fa-water"></i>
+                    </div>
+                    <h4 class="font-bold mb-2 text-lg">Potencial</h4>
+                    <p class="text-gray-600">
+                        Redes comunitarias sólidas, diversidad cultural, tradiciones musicales vivas y jóvenes comprometidos con su territorio.
+                    </p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-green-500">
+                    <div class="text-green-500 text-3xl mb-4">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <h4 class="font-bold mb-2 text-lg">Oportunidad</h4>
+                    <p class="text-gray-600">
+                        La música como lenguaje común para construir paz, fortalecer identidad y generar desarrollo cultural sostenible.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Methodology Transition -->
+    <div class="transition-section"></div>
+
+    <!-- Methodology Section -->
+    <section id="methodology" class="methodology-section text-white py-20 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Nuestra Metodología</h2>
+                <div class="w-24 h-1 bg-yellow-300 mx-auto mb-6"></div>
+                <p class="text-xl max-w-3xl mx-auto">
+                    Un viaje de cinco fases que transforma el diagnóstico en celebración, el dolor en arte, y la resistencia en esperanza colectiva.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-6 mb-16">
+                <div class="phase-card bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20">
+                    <div class="text-4xl mb-4 text-yellow-300">1</div>
+                    <h3 class="font-bold mb-2 text-lg">Escucha Fluvial</h3>
+                    <p class="text-sm">
+                        Talleres de diagnóstico participativo en comunidades ribereñas para identificar necesidades y talentos.
+                    </p>
+                </div>
+                
+                <div class="phase-card bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20">
+                    <div class="text-4xl mb-4 text-yellow-300">2</div>
+                    <h3 class="font-bold mb-2 text-lg">Tejido Sonoro</h3>
+                    <p class="text-sm">
+                        Encuentros intergeneracionales para recuperar tradiciones musicales y crear nuevas composiciones.
+                    </p>
+                </div>
+                
+                <div class="phase-card bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20">
+                    <div class="text-4xl mb-4 text-yellow-300">3</div>
+                    <h3 class="font-bold mb-2 text-lg">Canales de Creación</h3>
+                    <p class="text-sm">
+                        Laboratorios creativos donde los jóvenes desarrollan habilidades musicales y de producción cultural.
+                    </p>
+                </div>
+                
+                <div class="phase-card bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20">
+                    <div class="text-4xl mb-4 text-yellow-300">4</div>
+                    <h3 class="font-bold mb-2 text-lg">Embarcación Festiva</h3>
+                    <p class="text-sm">
+                        Producción colectiva del festival con participación activa de las comunidades en todos los aspectos.
+                    </p>
+                </div>
+                
+                <div class="phase-card bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20">
+                    <div class="text-4xl mb-4 text-yellow-300">5</div>
+                    <h3 class="font-bold mb-2 text-lg">Redes que Fluyen</h3>
+                    <p class="text-sm">
+                        Sistematización y proyección del proceso para garantizar sostenibilidad y replicabilidad.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="bg-black/30 backdrop-blur-sm rounded-xl p-8 max-w-4xl mx-auto border border-white/20">
+                <h3 class="text-2xl font-bold mb-4 text-yellow-300">Impacto Esperado</h3>
+                <ul class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-green-300 mt-1 mr-2"></i>
+                        <span>Fortalecer 20 expresiones musicales tradicionales de la región</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-green-300 mt-1 mr-2"></i>
+                        <span>Formar 150 jóvenes en producción musical comunitaria</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-green-300 mt-1 mr-2"></i>
+                        <span>Realizar 5 encuentros intermunicipales de intercambio cultural</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-green-300 mt-1 mr-2"></i>
+                        <span>Producir 1 festival anual que reúna a 3,000 personas</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Night Transition -->
+    <div class="transition-night"></div>
+
+    <!-- Night Festival Section -->
+    <section id="night" class="night-section py-20 px-6 relative overflow-hidden">
+        <!-- Floating music notes -->
+        <div id="music-notes"></div>
+        
+        <div class="max-w-6xl mx-auto relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-yellow-300 title-font">Kompira Maru Festival</h2>
+                <div class="w-24 h-1 bg-red-500 mx-auto mb-6"></div>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    Cuando el sol se oculta tras el río, la música ilumina la noche y convierte el dolor en fiesta colectiva.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
+                <div>
+                    <h3 class="text-2xl font-bold mb-6 text-white">Experiencia del Festival</h3>
+                    <p class="text-gray-300 mb-6">
+                        El Festival Kompira Maru es un espacio donde las comunidades del Magdalena Medio toman el protagonismo. Durante tres días, las riberas del río se transforman en escenarios naturales donde confluyen tradición e innovación.
+                    </p>
+                    <p class="text-gray-300 mb-6">
+                        Conciertos al atardecer, talleres de construcción de instrumentos con materiales locales, conversatorios sobre memoria y resistencia, y jam sessions espontáneas donde músicos tradicionales y urbanos crean juntos.
+                    </p>
+                    <div class="bg-purple-900/50 border-l-4 border-yellow-300 p-4 mb-6">
+                        <p class="text-yellow-300 font-medium">
+                            "De día trabajamos la tierra, de noche cantamos nuestra historia. El festival es el espejo donde nos reconocemos libres."
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="rounded-xl overflow-hidden shadow-xl transform rotate-1 hover:rotate-0 transition duration-500">
+                    <img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Concierto nocturno" class="w-full h-auto">
+                </div>
+            </div>
+            
+            <div class="bg-gradient-to-r from-purple-900/50 to-red-900/50 backdrop-blur-sm rounded-xl p-8 border border-white/20">
+                <h3 class="text-2xl font-bold mb-6 text-white">Edición 2024</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-black/30 p-6 rounded-lg border border-yellow-300/20">
+                        <div class="text-yellow-300 text-2xl mb-3">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <h4 class="font-bold mb-1">Fecha</h4>
+                        <p class="text-gray-300">15-17 Noviembre 2024</p>
+                    </div>
+                    
+                    <div class="bg-black/30 p-6 rounded-lg border border-yellow-300/20">
+                        <div class="text-yellow-300 text-2xl mb-3">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h4 class="font-bold mb-1">Lugar</h4>
+                        <p class="text-gray-300">Riberas del Río Magdalena, Barrancabermeja</p>
+                    </div>
+                    
+                    <div class="bg-black/30 p-6 rounded-lg border border-yellow-300/20">
+                        <div class="text-yellow-300 text-2xl mb-3">
+                            <i class="fas fa-music"></i>
+                        </div>
+                        <h4 class="font-bold mb-1">Invitados</h4>
+                        <p class="text-gray-300">30 agrupaciones locales y nacionales</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="bg-white py-20 px-6">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-purple-700">¿Quieres ser parte de esta corriente?</h2>
+                <div class="w-24 h-1 bg-red-500 mx-auto mb-6"></div>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Únete como artista, voluntario, donante o simplemente como espectador comprometido.
+                </p>
+            </div>
+            
+            <form class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label for="name" class="block text-gray-700 mb-2">Nombre completo</label>
+                    <input type="text" id="name" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition">
+                </div>
+                
+                <div>
+                    <label for="email" class="block text-gray-700 mb-2">Correo electrónico</label>
+                    <input type="email" id="email" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition">
+                </div>
+                
+                <div>
+                    <label for="role" class="block text-gray-700 mb-2">¿Cómo quieres participar?</label>
+                    <select id="role" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition">
+                        <option value="">Selecciona una opción</option>
+                        <option value="artist">Artista o agrupación musical</option>
+                        <option value="volunteer">Voluntario</option>
+                        <option value="donor">Donante o patrocinador</option>
+                        <option value="attendee">Asistente al festival</option>
+                        <option value="other">Otro</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label for="community" class="block text-gray-700 mb-2">Comunidad u organización</label>
+                    <input type="text" id="community" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition">
+                </div>
+                
+                <div class="md:col-span-2">
+                    <label for="message" class="block text-gray-700 mb-2">Mensaje</label>
+                    <textarea id="message" rows="4" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition"></textarea>
+                </div>
+                
+                <div class="md:col-span-2">
+                    <button type="submit" class="w-full px-6 py-4 bg-red-500 hover:bg-red-600 text-white font-bold rounded-lg transition transform hover:scale-105">
+                        Enviar mi solicitud
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-purple-900 text-white py-12 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4 title-font">Kompira Maru</h3>
+                    <p class="text-purple-200">
+                        Festival Musical por la Paz del Magdalena Medio
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Enlaces</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-purple-200 hover:text-white transition" onclick="navigate(event, 'diagnostic')">Diagnóstico</a></li>
+                        <li><a href="#" class="text-purple-200 hover:text-white transition" onclick="navigate(event, 'methodology')">Metodología</a></li>
+                        <li><a href="#" class="text-purple-200 hover:text-white transition" onclick="navigate(event, 'night')">Festival</a></li>
+                        <li><a href="#" class="text-purple-200 hover:text-white transition" onclick="navigate(event, 'contact')">Participa</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Contacto</h4>
+                    <ul class="space-y-2 text-purple-200">
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope mt-1 mr-2"></i>
+                            <span>contacto@kompiramaru.org</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fab fa-whatsapp mt-1 mr-2"></i>
+                            <span>+57 310 123 4567</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-2"></i>
+                            <span>Barrancabermeja, Santander</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Síguenos</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-purple-800 hover:bg-purple-700 flex items-center justify-center transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-purple-800 hover:bg-purple-700 flex items-center justify-center transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-purple-800 hover:bg-purple-700 flex items-center justify-center transition">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-purple-800 hover:bg-purple-700 flex items-center justify-center transition">
+                            <i class="fab fa-spotify"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-purple-800 pt-8 text-center text-purple-300">
+                <p>© 2024 Festival Kompira Maru. Todos los derechos reservados.</p>
+                <p class="mt-2">Una iniciativa comunitaria por la paz del Magdalena Medio.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Create floating elements
+        function createFloatingElements() {
+            const container = document.getElementById('floating-elements');
+            const types = ['leaf', 'music-note'];
+            const colors = ['text-green-500', 'text-purple-400', 'text-red-400', 'text-yellow-300'];
+            
+            for (let i = 0; i < 20; i++) {
+                const type = types[Math.floor(Math.random() * types.length)];
+                const element = document.createElement('div');
+                element.className = `${type} ${colors[Math.floor(Math.random() * colors.length)]}`;
+                
+                // Random position
+                const left = Math.random() * 100;
+                const size = Math.random() * 20 + 10;
+                const duration = Math.random() * 20 + 10;
+                const delay = Math.random() * 10;
+                
+                element.style.left = `${left}%`;
+                element.style.fontSize = `${size}px`;
+                element.style.animationDuration = `${duration}s`;
+                element.style.animationDelay = `${delay}s`;
+                
+                if (type === 'leaf') {
+                    element.innerHTML = '<i class="fas fa-leaf"></i>';
+                } else {
+                    element.innerHTML = '<i class="fas fa-music"></i>';
+                }
+                
+                container.appendChild(element);
+            }
+        }
+        
+        // Create music notes for night section
+        function createMusicNotes() {
+            const container = document.getElementById('music-notes');
+            const notes = ['fa-music', 'fa-headphones', 'fa-guitar', 'fa-drum'];
+            
+            for (let i = 0; i < 15; i++) {
+                const note = document.createElement('div');
+                note.className = 'music-note text-yellow-300';
+                
+                // Random position and animation
+                const left = Math.random() * 100;
+                const size = Math.random() * 20 + 10;
+                const duration = Math.random() * 8 + 5;
+                const delay = Math.random() * 5;
+                const noteType = notes[Math.floor(Math.random() * notes.length)];
+                
+                note.style.left = `${left}%`;
+                note.style.fontSize = `${size}px`;
+                note.style.animationDuration = `${duration}s`;
+                note.style.animationDelay = `${delay}s`;
+                note.style.bottom = `${Math.random() * 20}%`;
+                
+                note.innerHTML = `<i class="fas ${noteType}"></i>`;
+                container.appendChild(note);
+            }
+        }
+        
+        // Navigation
+        function navigate(event, sectionId) {
+            event.preventDefault();
+            document.getElementById(sectionId).scrollIntoView({
+                behavior: 'smooth'
+            });
+            
+            // Close mobile menu if open
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (!mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.add('hidden');
+            }
+        }
+        
+        // Toggle mobile menu
+        function toggleMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            createFloatingElements();
+            createMusicNotes();
+            
+            // Add intersection observer for animations
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            fadeElements.forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
