@@ -162,8 +162,8 @@
 <button class="filter-btn px-4 py-2 rounded-full border border-gray-700 hover:bg-gray-800 transition" onclick="filterProjects('podcast')">
       Podcast
     </button>
-<button class="filter-btn px-4 py-2 rounded-full border border-gray-700 hover:bg-gray-800 transition" onclick="filterProjects('lab')">
-      Laboratorio Urbano
+<button class="filter-btn px-4 py-2 rounded-full border border-yellow-700 text-yellow-200 hover:bg-yellow-700 transition" onclick="filterProjects('lab')">
+      Labs
     </button>
 <button class="filter-btn px-4 py-2 rounded-full border border-gray-700 hover:bg-gray-800 transition" onclick="filterProjects('environment')">
       Medio Ambiente
@@ -582,7 +582,7 @@
                       ${project.category === 'culture' ? 'bg-purple-900 text-purple-200' :
                         project.category === 'tech' ? 'bg-blue-900 text-blue-200' :
                         project.category === 'podcast' ? 'bg-pink-900 text-pink-200' :
-                        project.category === 'lab' ? 'bg-red-900 text-red-200' :
+                        project.category === 'lab' ? 'bg-yellow-700 text-yellow-200' :
                         project.category === 'environment' ? 'bg-green-900 text-green-200' :
                         project.category === 'politics' ? 'bg-red-700 text-white' :
                         'bg-gray-700 text-gray-200'}">
@@ -592,6 +592,7 @@
                           ? 'Cultura'
                           : project.category === 'tech'
                           ? 'Tecnología'
+                            : project.category === 'lab' ? 'Labs' :
                           : project.category === 'politics'
                           ? 'Campañas Políticas'
                           : (project.category.charAt(0).toUpperCase() + project.category.slice(1))}
