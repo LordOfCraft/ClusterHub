@@ -163,7 +163,7 @@
             background: linear-gradient(45deg, #6B4423, #3A5A40); /* Fondo de respaldo */
         }
         
-        .video-container video {
+        .video-container iframe {
             position: absolute;
             top: 0;
             left: 0;
@@ -328,12 +328,7 @@
 <section class="relative" id="portal">
 <!-- Contenedor de video con fondo de respaldo -->
 <div class="video-container">
-<video autoplay="" class="video-bg" loop="" muted="" playsinline="">
-<source src="disruptor.mp4" type="video/mp4"/>
-<source src="disruptor.webm" type="video/webm"/>
-<!-- Fallback para navegadores sin soporte de video -->
-<img alt="Fondo Casas de los Saberes" class="absolute inset-0 w-full h-full object-cover" src="fallback-image.jpg"/>
-</video>
+<iframe class="video-bg" src="https://www.youtube.com/embed/U8hgR0u_jKY?autoplay=1&amp;mute=1&amp;loop=1&amp;playlist=U8hgR0u_jKY" title="Disruptor" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 <!-- Overlay de contenido posicionado estratégicamente -->
 <div class="content-overlay">
 <!-- Contenido superior (izquierda) -->
@@ -351,9 +346,6 @@
                         Entra al saber
                     </a>
 <p class="text-sm text-amber-200 mb-2">Presiona para explorar</p>
-<button class="text-sm text-amber-300 hover:text-white transition" id="unmuteButton">
-<i class="fas fa-volume-mute mr-1"></i> Activar sonido
-                    </button>
 </div>
 </div>
 </div>
@@ -454,11 +446,8 @@
 <section class="relative text-white py-20 px-6 overflow-hidden" id="resistance">
 <!-- Fondo de video con desenfoque -->
 <div class="absolute inset-0 z-0">
-<video autoplay="" class="w-full h-full object-cover" loop="" muted="" playsinline="">
-<source src="manifiesto.mp4" type="video/mp4"/>
-            Tu navegador no soporta videos HTML5.
-        </video>
-<div class="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+<iframe class="w-full h-full object-cover" src="https://www.youtube.com/embed/ZJQFd84god4?autoplay=1&amp;mute=1&amp;loop=1&amp;playlist=ZJQFd84god4" title="Manifiesto" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <div class="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
 </div>
 <!-- Contenido sobre el video -->
 <div class="max-w-6xl mx-auto relative z-10">
@@ -743,56 +732,6 @@
 </div>
 </footer>
 <script>
-        // Control de sonido de los videos basado en scroll
-        function setupVideoAudioControl() {
-            const firstVideo = document.querySelector('.video-bg');
-            const secondVideo = document.querySelector('#resistance video');
-            const unmuteButton = document.getElementById('unmuteButton');
-            
-            // Configurar el observador para el segundo video
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        // Cuando el segundo video es visible
-                        if (firstVideo) {
-                            firstVideo.muted = true;
-                        }
-                        if (secondVideo) {
-                            secondVideo.muted = false;
-                            // Intentar reproducir si no está reproduciéndose
-                            secondVideo.play().catch(e => console.log("Error al reproducir segundo video:", e));
-                        }
-                        // Actualizar botón de mute
-                        if (unmuteButton) {
-                            unmuteButton.innerHTML = '<i class="fas fa-volume-mute mr-1"></i> Activar sonido';
-                        }
-                    } else {
-                        // Cuando el segundo video no es visible
-                        if (secondVideo) {
-                            secondVideo.muted = true;
-                        }
-                    }
-                });
-            }, { threshold: 0.5 }); // 50% del elemento visible
-            
-            if (secondVideo) {
-                observer.observe(secondVideo);
-                
-                // Configurar botón de mute para el primer video
-                if (unmuteButton && firstVideo) {
-                    unmuteButton.addEventListener('click', () => {
-                        firstVideo.muted = !firstVideo.muted;
-                        unmuteButton.innerHTML = firstVideo.muted 
-                            ? '<i class="fas fa-volume-mute mr-1"></i> Activar sonido' 
-                            : '<i class="fas fa-volume-up mr-1"></i> Sonido activado';
-                        
-                        if (!firstVideo.muted) {
-                            firstVideo.play().catch(e => console.log("Error al reproducir:", e));
-                        }
-                    });
-                }
-            }
-        }
 
         // Create floating elements
         function createFloatingElements() {
@@ -886,7 +825,6 @@ function setupCosmicImageSlider() {
 document.addEventListener('DOMContentLoaded', () => {
     setupCosmicImageSlider();
             // Inicializar funciones
-            setupVideoAudioControl();
             createFloatingElements();
             setupIntersectionObserver();
             setupBackgroundSlider();
@@ -897,14 +835,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 el.style.transitionDelay = `${index * 0.2}s`;
             });
 
-            // Fallback si el video no carga
-            const video = document.querySelector('.video-bg');
-            if (video) {
-                video.addEventListener('error', () => {
-                    console.log("Error cargando el video, mostrando fondo alternativo");
-                    video.style.display = 'none';
-                });
-            }
         });
     </script>
 </body>
