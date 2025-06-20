@@ -584,6 +584,7 @@
                         project.category === 'podcast' ? 'bg-pink-900 text-pink-200' :
                         project.category === 'lab' ? 'bg-red-900 text-red-200' :
                         project.category === 'environment' ? 'bg-green-900 text-green-200' :
+                        project.category === 'politics' ? 'bg-red-700 text-white' :
                         'bg-gray-700 text-gray-200'}">
                       ${project.category === 'environment'
                           ? 'Medio ambiente'
@@ -591,6 +592,8 @@
                           ? 'Cultura'
                           : project.category === 'tech'
                           ? 'Tecnología'
+                          : project.category === 'politics'
+                          ? 'Campañas Políticas'
                           : (project.category.charAt(0).toUpperCase() + project.category.slice(1))}
                   </span>
                   <h3 class="text-xl font-bold mb-2">${project.title}</h3>
