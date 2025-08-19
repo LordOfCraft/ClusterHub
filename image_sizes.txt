@@ -61,10 +61,10 @@
 ./assets/img/talento/jesus-rios/profile@2x.avif 0
 ./assets/img/talento/jesus-rios/profile@2x.jpg 0
 ./assets/img/talento/jesus-rios/profile@2x.webp 0
-./bacatá.png 2284521
-./capitoliointeractivo.png 1792799
+./assets/img/proyectos/bacatacartografia/bacatá.png 2284521
+./assets/img/proyectos/capitoliointeractivo/capitoliointeractivo.png 1792799
 ./index_files/clasterhublogo.png 2274484
 ./kompira.png 2298778
 ./proyecto_ebra.png 78359
-./pythonaplicadoalfulbo.png 2754486
-./toccalternativa.jpg 128892
+./assets/img/proyectos/pythonpaquetes/pythonaplicadoalfulbo.png 2754486
+./assets/img/proyectos/concejosdejuventud2021/toccalternativa.jpg 128892
