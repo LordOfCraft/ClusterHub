@@ -208,7 +208,11 @@
     <div id="circuitContainer"></div>
     
     <!-- Logo central -->
-    <img src="assets/ClvsterHvbLogo.png" alt="CLVSTER HVB" class="logo-center">
+    <picture>
+      <source srcset="assets/img/home/hero.avif 1x, assets/img/home/hero@2x.avif 2x" type="image/avif" sizes="(max-width: 600px) 100vw, 600px" />
+      <source srcset="assets/img/home/hero.webp 1x, assets/img/home/hero@2x.webp 2x" type="image/webp" sizes="(max-width: 600px) 100vw, 600px" />
+      <img src="assets/img/home/hero.jpg" srcset="assets/img/home/hero.jpg 1x, assets/img/home/hero@2x.jpg 2x" width="600" height="400" alt="CLVSTER HVB" class="logo-center" loading="lazy" decoding="async" />
+    </picture>
     
     <!-- Botón de entrada -->
     <a href="clusterhub.html" class="enter-portal">ENTRAR AL PORTAL</a>

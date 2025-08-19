@@ -270,7 +270,11 @@
 <div class="grid grid-cols-2 gap-4">
 <div class="bg-gray-800 p-6 rounded-xl shadow-md text-center card-hover glow-border">
 <div class="w-24 h-24 rounded-full bg-gray-700 mx-auto mb-4 overflow-hidden">
-<img alt="Fundadora" class="w-full h-full object-cover" src="jesus_rios.jpg"/>
+<picture>
+  <source srcset="assets/img/talento/jesus-rios/profile.avif 1x, assets/img/talento/jesus-rios/profile@2x.avif 2x" type="image/avif" sizes="96px" />
+  <source srcset="assets/img/talento/jesus-rios/profile.webp 1x, assets/img/talento/jesus-rios/profile@2x.webp 2x" type="image/webp" sizes="96px" />
+  <img src="assets/img/talento/jesus-rios/profile.jpg" srcset="assets/img/talento/jesus-rios/profile.jpg 1x, assets/img/talento/jesus-rios/profile@2x.jpg 2x" width="96" height="96" alt="Fundadora" class="w-full h-full object-cover" loading="lazy" decoding="async" />
+</picture>
 </div>
 <h4 class="font-bold mb-1">Jesús María Ríos Trujillo</h4>
 <p class="text-sm text-gray-400 mb-2">Director Ejecutivo</p>
@@ -281,7 +285,11 @@
 </div>
 <div class="bg-gray-800 p-6 rounded-xl shadow-md text-center card-hover glow-border">
 <div class="w-24 h-24 rounded-full bg-gray-700 mx-auto mb-4 overflow-hidden">
-<img alt="Co-fundador" class="w-full h-full object-cover" src="heberto_jimenez.jpg"/>
+<picture>
+  <source srcset="assets/img/talento/heberto-jimenez/profile.avif 1x, assets/img/talento/heberto-jimenez/profile@2x.avif 2x" type="image/avif" sizes="96px" />
+  <source srcset="assets/img/talento/heberto-jimenez/profile.webp 1x, assets/img/talento/heberto-jimenez/profile@2x.webp 2x" type="image/webp" sizes="96px" />
+  <img src="assets/img/talento/heberto-jimenez/profile.jpg" srcset="assets/img/talento/heberto-jimenez/profile.jpg 1x, assets/img/talento/heberto-jimenez/profile@2x.jpg 2x" width="96" height="96" alt="Co-fundador" class="w-full h-full object-cover" loading="lazy" decoding="async" />
+</picture>
 </div>
 <h4 class="font-bold mb-1">Heberto Jimenez Estupiñan</h4>
 <p class="text-sm text-gray-400 mb-2">Director Tecnológico</p>
@@ -292,7 +300,9 @@
 </div>
 <div class="bg-gray-800 p-6 rounded-xl shadow-md text-center card-hover glow-border">
 <div class="w-24 h-24 rounded-full bg-gray-700 mx-auto mb-4 overflow-hidden">
-<img alt="Co-fundadora" class="w-full h-full object-cover" src="https://randomuser.me/api/portraits/women/68.jpg"/>
+<picture>
+  <img alt="Co-fundadora" class="w-full h-full object-cover" src="https://randomuser.me/api/portraits/women/68.jpg" width="96" height="96" loading="lazy" decoding="async" />
+</picture>
 </div>
 <h4 class="font-bold mb-1">Ana Gómez</h4>
 <p class="text-sm text-gray-400 mb-2">Directora Cultural</p>
@@ -303,7 +313,9 @@
 </div>
 <div class="bg-gray-800 p-6 rounded-xl shadow-md text-center card-hover glow-border">
 <div class="w-24 h-24 rounded-full bg-gray-700 mx-auto mb-4 overflow-hidden">
-<img alt="Co-fundador" class="w-full h-full object-cover" src="https://randomuser.me/api/portraits/men/75.jpg"/>
+<picture>
+  <img alt="Co-fundador" class="w-full h-full object-cover" src="https://randomuser.me/api/portraits/men/75.jpg" width="96" height="96" loading="lazy" decoding="async" />
+</picture>
 </div>
 <h4 class="font-bold mb-1">José Martínez</h4>
 <p class="text-sm text-gray-400 mb-2">Director de Impacto Social</p>
@@ -563,12 +575,12 @@
       {
           "title": "Festival Musical por la Paz del Magdalena Medio - Kompira Maru",
           "description": "Banda aliada estratégica que representa la voz de la juventud barranqueña con música combativa y poética.",
-          "image": "proyectos/kompira.png", "id": 6, "category": "culture", "link": "proyectos/kompira/index.html"
+          "imageBase": "assets/img/proyectos/kompira-maru/card", "id": 6, "category": "culture", "link": "proyectos/kompira/index.html"
       },
       {
           "title": "Red de Casas de Saberes Ancestrales - Colectivo Ebra",
           "description": "Laboratorio cultural entre Bogotá y Barrancabermeja que conecta investigación, sonido y resistencia desde las casas del saber.",
-          "image": "proyecto_ebra.png", "id": 7, "category": "culture", "link": "proyectos/ebra/index.html"
+          "imageBase": "assets/img/proyectos/ebra/card", "id": 7, "category": "culture", "link": "proyectos/ebra/index.html"
       }
     ];
 
@@ -584,13 +596,19 @@
       filteredProjects.forEach(project => {
           const projectEl = document.createElement('div');
           projectEl.className = 'bg-gray-800 rounded-xl overflow-hidden shadow-lg card-hover glow-border';
+          const imageHTML = project.imageBase ? `
+              <picture>
+                <source srcset="${project.imageBase}.avif 1x, ${project.imageBase}@2x.avif 2x" type="image/avif" sizes="(max-width: 768px) 100vw, 400px" />
+                <source srcset="${project.imageBase}.webp 1x, ${project.imageBase}@2x.webp 2x" type="image/webp" sizes="(max-width: 768px) 100vw, 400px" />
+                <img src="${project.imageBase}.jpg" srcset="${project.imageBase}.jpg 1x, ${project.imageBase}@2x.jpg 2x" alt="${project.title}" class="w-full h-full object-cover" width="400" height="300" loading="lazy" decoding="async" />
+              </picture>` : `<picture><img src="${project.image}" alt="${project.title}" class="w-full h-full object-cover" width="400" height="300" loading="lazy" decoding="async" /></picture>`;
           projectEl.innerHTML = `
               <div class="h-48 overflow-hidden">
-                  <img src="${project.image}" alt="${project.title}" class="w-full h-full object-cover">
+                  ${imageHTML}
               </div>
               <div class="p-6">
-                  <span class="inline-block px-3 py-1 text-xs font-semibold rounded-full mb-2 
-                      ${project.category === 'culture' ? 'bg-purple-900 text-purple-200' : 
+                  <span class="inline-block px-3 py-1 text-xs font-semibold rounded-full mb-2
+                      ${project.category === 'culture' ? 'bg-purple-900 text-purple-200' :
                         project.category === 'tech' ? 'bg-blue-900 text-blue-200' :
                         project.category === 'podcast' ? 'bg-pink-900 text-pink-200' :
                         project.category === 'lab' ? 'bg-red-900 text-red-200' :
