@@ -74,8 +74,8 @@
     }
     
     .filter-btn.active {
-      background-color: var(--clvster-purple);
-      color: white;
+      transform: translateY(-1px);
+      box-shadow: 0 0 12px rgba(148, 163, 184, 0.25);
     }
     
     .map-container {
@@ -179,7 +179,7 @@
       Medio Ambiente
     </button>
 <button class="filter-btn px-4 py-2 rounded-full border border-gray-700 hover:bg-gray-800 transition" onclick="filterProjects('politics')">
-      Campañas Políticas
+      Política
     </button>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-container">
@@ -547,15 +547,99 @@
 </div>
 </footer>
 <script>
+    const categoryConfig = {
+      all: {
+        label: 'Todos',
+        buttonStyles: {
+          background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.25) 0%, rgba(59, 130, 246, 0.2) 60%, rgba(220, 38, 38, 0.2) 100%)',
+          color: '#f8fafc',
+          borderColor: 'rgba(148, 163, 184, 0.65)',
+          boxShadow: '0 0 18px rgba(148, 163, 184, 0.35)',
+          transform: 'translateY(-1px)'
+        }
+      },
+      culture: {
+        label: 'Cultura',
+        badgeClass: 'bg-purple-900 text-purple-200',
+        buttonStyles: {
+          backgroundColor: 'rgba(139, 92, 246, 0.18)',
+          color: '#ede9fe',
+          borderColor: 'rgba(139, 92, 246, 0.55)',
+          boxShadow: '0 0 15px rgba(139, 92, 246, 0.45)',
+          transform: 'translateY(-1px)'
+        }
+      },
+      tech: {
+        label: 'Tecnología',
+        badgeClass: 'bg-blue-900 text-blue-200',
+        buttonStyles: {
+          backgroundColor: 'rgba(59, 130, 246, 0.18)',
+          color: '#dbeafe',
+          borderColor: 'rgba(96, 165, 250, 0.55)',
+          boxShadow: '0 0 15px rgba(96, 165, 250, 0.45)',
+          transform: 'translateY(-1px)'
+        }
+      },
+      podcast: {
+        label: 'Podcast',
+        badgeClass: 'bg-pink-900 text-pink-200',
+        buttonStyles: {
+          backgroundColor: 'rgba(236, 72, 153, 0.2)',
+          color: '#fce7f3',
+          borderColor: 'rgba(244, 114, 182, 0.6)',
+          boxShadow: '0 0 15px rgba(244, 114, 182, 0.45)',
+          transform: 'translateY(-1px)'
+        }
+      },
+      lab: {
+        label: 'Laboratorio Urbano',
+        badgeClass: 'bg-red-900 text-red-200',
+        buttonStyles: {
+          backgroundColor: 'rgba(220, 38, 38, 0.2)',
+          color: '#fee2e2',
+          borderColor: 'rgba(248, 113, 113, 0.6)',
+          boxShadow: '0 0 15px rgba(248, 113, 113, 0.4)',
+          transform: 'translateY(-1px)'
+        }
+      },
+      environment: {
+        label: 'Medio Ambiente',
+        badgeClass: 'bg-green-900 text-green-200',
+        buttonStyles: {
+          backgroundColor: 'rgba(16, 185, 129, 0.2)',
+          color: '#d1fae5',
+          borderColor: 'rgba(110, 231, 183, 0.6)',
+          boxShadow: '0 0 15px rgba(52, 211, 153, 0.45)',
+          transform: 'translateY(-1px)'
+        }
+      },
+      politics: {
+        label: 'Política',
+        badgeClass: 'border text-[#ffe6de]',
+        badgeStyle: 'background: rgba(255, 36, 0, 0.16); border-color: rgba(255, 36, 0, 0.65); box-shadow: 0 0 12px rgba(255, 36, 0, 0.35);',
+        buttonStyles: {
+          backgroundColor: 'rgba(255, 36, 0, 0.2)',
+          color: '#fff5f2',
+          borderColor: 'rgba(255, 36, 0, 0.7)',
+          boxShadow: '0 0 18px rgba(255, 36, 0, 0.55)',
+          transform: 'translateY(-1px)'
+        }
+      }
+    };
+
     // Sample projects data with corrected image paths and added links
     const projects = [
       {
-          "title": "Recicladores de Bogotá",
-          "description": "Proyecto de dignificación y fortalecimiento organizativo de recicladores urbanos como actores fundamentales del ecosistema ambiental.",
-          "image": "proyectos/recicladoresbogota/ff.png", "id": 8, "category": "environment", "link": "/proyectos/recicladoresbogota/"
+          "title": "Festival Musical por la Paz del Magdalena Medio - KOMPIRA MARU",
+          "description": "Banda aliada estratégica que representa la voz de la juventud barranqueña con música combativa y poética.",
+          "image": "kompira.png", "id": 6, "category": "culture", "link": "/proyectos/kompira-maru/"
       },
-
-        {
+      {
+          "title": "Red de Casas de Saberes Ancestrales - Colectivo Ebra",
+          "description": "Laboratorio cultural entre Bogotá y Barrancabermeja que conecta investigación, sonido y resistencia desde las casas del saber.",
+          "image": "proyecto_ebra.png", "id": 7, "category": "culture", "link": "/proyectos/ebra/"
+      },
+      {
             "title": "Python Aplicado al Fulbo para Paquetes",
             "description": "Un proyecto con jóvenes donde se utilizan datos de campeonatos de fútbol, tanto de la FIFA como locales, para enseñarles análisis de datos y predicción.",
             "image": "pythonaplicadoalfulbo.png", "id": 1, "category": "tech", "link": "/proyectos/pythonpaquetes/"
@@ -570,6 +654,11 @@
             "description": "Recreación del Senado de Colombia en videojuego para visualizar debates, actores políticos y su trabajo en tiempo real.",
             "image": "capitoliointeractivo.png", "id": 3, "category": "lab", "link": "/proyectos/capitoliointeractivo/"
         },
+      {
+          "title": "Recicladores de Bogotá",
+          "description": "Proyecto de dignificación y fortalecimiento organizativo de recicladores urbanos como actores fundamentales del ecosistema ambiental.",
+          "image": "proyectos/recicladoresbogota/ff.png", "id": 8, "category": "environment", "link": "/proyectos/recicladoresbogota/"
+      },
         {
             "title": "Concejos de Juventud 2025",
             "description": "Acompañamiento de Cluster Hub a jóvenes en la preparación de campañas políticas en todo el país.",
@@ -579,28 +668,32 @@
             "title": "Concejos de Juventud 2021",
             "description": "Victoria electoral en Barrancabermeja con la lista independiente 'LaTocca Alternativa'.",
             "image": "toccalternativa.jpg", "id": 5, "category": "politics", "link": "/proyectos/concejosdejuventud2021/"
-        },
-      {
-          "title": "Festival Musical por la Paz del Magdalena Medio - KOMPIRA MARU",
-          "description": "Banda aliada estratégica que representa la voz de la juventud barranqueña con música combativa y poética.",
-          "image": "kompira.png", "id": 6, "category": "culture", "link": "/proyectos/kompira-maru/"
-      },
-      {
-          "title": "Red de Casas de Saberes Ancestrales - Colectivo Ebra",
-          "description": "Laboratorio cultural entre Bogotá y Barrancabermeja que conecta investigación, sonido y resistencia desde las casas del saber.",
-          "image": "proyecto_ebra.png", "id": 7, "category": "culture", "link": "/proyectos/ebra/"
-      }
+        }
     ];
+
+    function applyButtonStyles(button, styles = {}) {
+      Object.entries(styles).forEach(([property, value]) => {
+          if (value) {
+              button.style[property] = value;
+          }
+      });
+    }
+
+    function resetButtonStyles(button) {
+      ['background', 'backgroundColor', 'color', 'borderColor', 'boxShadow', 'transform'].forEach(property => {
+          button.style[property] = '';
+      });
+    }
 
     // Initialize projects
     function renderProjects(filter = 'all') {
       const container = document.getElementById('projects-container');
       container.innerHTML = '';
-      
-      const filteredProjects = filter === 'all' 
-          ? projects 
+
+      const filteredProjects = filter === 'all'
+          ? projects
           : projects.filter(project => project.category === filter);
-      
+
       filteredProjects.forEach(project => {
           const projectEl = document.createElement('div');
           projectEl.className = 'bg-gray-800 rounded-xl overflow-hidden shadow-lg card-hover glow-border';
@@ -610,19 +703,18 @@
                 <source srcset="${project.imageBase}.webp 1x, ${project.imageBase}@2x.webp 2x" type="image/webp" sizes="(max-width: 768px) 100vw, 400px" />
                 <img src="${project.imageBase}.jpg" srcset="${project.imageBase}.jpg 1x, ${project.imageBase}@2x.jpg 2x" alt="${project.title}" class="w-full h-full object-cover" width="400" height="300" loading="lazy" decoding="async" />
               </picture>` : `<picture><img src="${project.image}" alt="${project.title}" class="w-full h-full object-cover" width="400" height="300" loading="lazy" decoding="async" /></picture>`;
+          const categoryInfo = categoryConfig[project.category] || {};
+          const badgeClasses = categoryInfo.badgeClass || 'bg-gray-700 text-gray-200';
+          const badgeStyle = categoryInfo.badgeStyle ? ` style="${categoryInfo.badgeStyle}"` : '';
+          const categoryLabel = categoryInfo.label || project.category.charAt(0).toUpperCase() + project.category.slice(1);
+
           projectEl.innerHTML = `
               <div class="h-48 overflow-hidden">
                   ${imageHTML}
               </div>
               <div class="p-6">
-                  <span class="inline-block px-3 py-1 text-xs font-semibold rounded-full mb-2
-                      ${project.category === 'culture' ? 'bg-purple-900 text-purple-200' :
-                        project.category === 'tech' ? 'bg-blue-900 text-blue-200' :
-                        project.category === 'podcast' ? 'bg-pink-900 text-pink-200' :
-                        project.category === 'lab' ? 'bg-red-900 text-red-200' :
-                        project.category === 'environment' ? 'bg-green-900 text-green-200' :
-                        'bg-gray-700 text-gray-200'}">
-                      ${project.category.charAt(0).toUpperCase() + project.category.slice(1)}
+                  <span class="inline-block px-3 py-1 text-xs font-semibold rounded-full mb-2 ${badgeClasses}"${badgeStyle}>
+                      ${categoryLabel}
                   </span>
                   <h3 class="text-xl font-bold mb-2">${project.title}</h3>
                   <p class="text-gray-300 mb-4">${project.description}</p>
@@ -637,12 +729,25 @@
     function filterProjects(category) {
       // Update active filter button
       document.querySelectorAll('.filter-btn').forEach(btn => {
-          btn.classList.remove('active', 'bg-purple-600', 'text-white');
+          btn.classList.remove('active');
+          resetButtonStyles(btn);
       });
-      
+
       const activeBtn = document.querySelector(`.filter-btn[onclick="filterProjects('${category}')"]`);
-      activeBtn.classList.add('active', 'bg-purple-600', 'text-white');
-      
+      if (activeBtn) {
+          activeBtn.classList.add('active');
+          const config = categoryConfig[category] || {};
+          if (config.buttonStyles) {
+              applyButtonStyles(activeBtn, config.buttonStyles);
+          } else {
+              applyButtonStyles(activeBtn, {
+                  backgroundColor: 'var(--clvster-purple)',
+                  color: '#ffffff',
+                  transform: 'translateY(-1px)'
+              });
+          }
+      }
+
       renderProjects(category);
     }
 
