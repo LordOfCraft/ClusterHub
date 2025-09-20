@@ -1,30 +1,156 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta property="og:title" content="KOMPIRA MARU">
-  <meta property="og:description" content="Página del proyecto KOMPIRA MARU.">
-  <meta property="og:image" content="/assets/img/og/kompira-maru.jpg">
-  <meta name="twitter:card" content="summary_large_image">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="manifest" href="/site.webmanifest">
-  <link rel="preload" as="image" href="../../kompira.png">
-  <title>KOMPIRA MARU</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>KOMPIRA MARU | Laboratorio sonoro del Magdalena Medio</title>
+  <meta name="description" content="Banda‑colectivo que fusiona tradición santandereana con rock, funk y caribe. Laboratorio de escucha, improvisación y fusión." />
+  <link rel="icon" href="/favicon-32x32.png" sizes="32x32" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .hero{background:radial-gradient(1200px 600px at 15% -10%, rgba(245,158,11,.18), transparent 60%),
+                    radial-gradient(1200px 600px at 120% 10%, rgba(239,68,68,.25), transparent 60%),
+                    linear-gradient(180deg,#0b0f1a,#0b0f1a)}
+    .yt-thumb{aspect-ratio:16/9; background:#0b0f1a;}
+  </style>
 </head>
-<body>
-  <picture>
-    <img src="../../kompira.png" width="1200" height="675" alt="Festival Kompira Maru" loading="lazy" decoding="async" />
-  </picture>
-  <h1>KOMPIRA MARU</h1>
-  <nav>
-    <ul>
-      <li><a href="./portafolio/">Portafolio</a></li>
-      <li><a href="../../clusterhub.html">Volver a CLVSTER HVB</a></li>
-    </ul>
-  </nav>
-  <a href="./portafolio/">Ver portafolio</a>
-  <p>Página en construcción.</p>
+<body class="bg-slate-950 text-slate-100">
+  <!-- NAV -->
+  <header class="sticky top-0 z-40 border-b border-slate-800 bg-black/70 backdrop-blur">
+    <nav class="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
+      <a href="/proyectos/kompira-maru/" class="font-bold tracking-wide text-amber-300">KOMPIRA MARU</a>
+      <ul class="hidden sm:flex gap-6 text-sm">
+        <li><a class="hover:text-amber-300" href="#concepto">Concepto</a></li>
+        <li><a class="hover:text-amber-300" href="#frentes">Frentes</a></li>
+        <li><a class="hover:text-amber-300" href="#trayectoria">Trayectoria</a></li>
+        <li><a class="hover:text-amber-300" href="#multimedia">Multimedia</a></li>
+        <li><a class="hover:text-amber-300" href="/proyectos/kompira-maru/portafolio/">Portafolio</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="mx-auto max-w-6xl px-4 py-16 md:py-24 grid md:grid-cols-2 gap-8 items-center">
+      <div>
+        <h1 class="text-4xl md:text-5xl font-extrabold leading-tight">Laboratorio sonoro del Magdalena Medio</h1>
+        <p class="mt-4 text-slate-300 max-w-prose">Banda‑colectivo que mezcla rock, funk y cadencia caribeña con folclor santandereano. Creamos desde la <span class="text-amber-300">escucha activa</span>, la <span class="text-amber-300">improvisación</span> y la <span class="text-amber-300">fusión</span>.</p>
+        <div class="mt-6 flex gap-3">
+          <a href="#multimedia" class="px-5 py-2 rounded bg-amber-400 text-black font-semibold">Ver videos</a>
+          <a href="/proyectos/kompira-maru/portafolio/" class="px-5 py-2 rounded border border-amber-400 text-amber-300">Portafolio</a>
+        </div>
+      </div>
+      <figure class="rounded-xl overflow-hidden border border-slate-800">
+        <video class="w-full h-auto" autoplay muted loop playsinline poster="/proyectos/kompira-maru/assets/img/hero/kompira-hero.webp">
+          <source src="/proyectos/kompira-maru/assets/multimedia/sample-hero.mp4" type="video/mp4" />
+        </video>
+      </figure>
+    </div>
+  </section>
+
+  <!-- CONCEPTO GENERAL -->
+  <section id="concepto" class="mx-auto max-w-6xl px-4 py-12 md:py-16">
+    <h2 class="text-2xl font-bold mb-4">Concepto</h2>
+    <p class="text-slate-300 max-w-3xl">Kompira Maru es un laboratorio musical que produce obra inédita y puesta en escena inmersiva. La banda articula guitarras, bajo, teclados, batería, metales y congas para un sonido híbrido que invita a la reflexión y al baile.</p>
+  </section>
+
+  <!-- FRENTES / SUBÍNDICES -->
+  <section id="frentes" class="bg-slate-900/40 border-y border-slate-800">
+    <div class="mx-auto max-w-6xl px-4 py-12 grid md:grid-cols-3 gap-6">
+      <a href="/proyectos/kompira-maru/festivalpaz/" class="block rounded-xl border border-slate-800 p-6 hover:border-amber-400">
+        <h3 class="font-semibold">Festival de la Paz</h3>
+        <p class="text-sm text-slate-400">Cartel, crónica y materiales del festival.</p>
+      </a>
+      <a href="/proyectos/kompira-maru/multimedia/" class="block rounded-xl border border-slate-800 p-6 hover:border-amber-400">
+        <h3 class="font-semibold">Multimedia</h3>
+        <p class="text-sm text-slate-400">Galería de fotos, artes y press kit.</p>
+      </a>
+      <a href="/proyectos/kompira-maru/portafolio/" class="block rounded-xl border border-slate-800 p-6 hover:border-amber-400">
+        <h3 class="font-semibold">Portafolio</h3>
+        <p class="text-sm text-slate-400">Brochure y trayectoria en un solo lugar.</p>
+      </a>
+    </div>
+  </section>
+
+  <!-- TRAYECTORIA (BOCETOS del PDF) -->
+  <section id="trayectoria" class="mx-auto max-w-6xl px-4 py-12 md:py-16">
+    <h2 class="text-2xl font-bold mb-6">Trayectoria</h2>
+    <p class="text-slate-400 mb-6">Clips referenciados en el dossier (sección BOCETOS). Fechas y notas editables.</p>
+    <div id="timeline" class="relative pl-6">
+      <!-- línea -->
+      <div class="absolute left-0 top-0 h-full w-px bg-slate-700"></div>
+      <!-- items renderizados por JS -->
+    </div>
+  </section>
+
+  <!-- MULTIMEDIA RESUMEN -->
+  <section id="multimedia" class="bg-slate-900/40 border-y border-slate-800">
+    <div class="mx-auto max-w-6xl px-4 py-12 grid md:grid-cols-3 gap-6">
+      <article class="rounded-xl overflow-hidden border border-slate-800">
+        <video class="w-full yt-thumb" autoplay muted loop playsinline poster="/proyectos/kompira-maru/assets/img/thumbs/sample-1.webp">
+          <source src="/proyectos/kompira-maru/assets/multimedia/sample-1.mp4" type="video/mp4" />
+        </video>
+        <div class="p-4 text-sm text-slate-300">Muestra de ensayo. Reemplaza el archivo en <code>assets/multimedia/sample-1.mp4</code>.</div>
+      </article>
+      <article class="rounded-xl overflow-hidden border border-slate-800">
+        <video class="w-full yt-thumb" autoplay muted loop playsinline poster="/proyectos/kompira-maru/assets/img/thumbs/sample-2.webp">
+          <source src="/proyectos/kompira-maru/assets/multimedia/sample-2.mp4" type="video/mp4" />
+        </video>
+        <div class="p-4 text-sm text-slate-300">Muestra en vivo.</div>
+      </article>
+      <article class="rounded-xl overflow-hidden border border-slate-800">
+        <a class="block" href="/proyectos/kompira-maru/portafolio/"><img class="w-full yt-thumb object-cover" src="/proyectos/kompira-maru/assets/img/thumbs/brochure.webp" alt="Brochure" /></a>
+        <div class="p-4 text-sm text-slate-300">Ver brochure completo en Portafolio.</div>
+      </article>
+    </div>
+  </section>
+
+  <footer class="mx-auto max-w-6xl px-4 py-10 text-slate-500 text-sm">
+    © <span id="y"></span> Kompira Maru. Sitio por CLVSTER HʌB.
+  </footer>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Links extraídos de Kompira.pdf (BOCETOS)
+    const YT = [
+      { fecha: '2024', titulo: 'Short 1', url: 'https://www.youtube.com/shorts/VgH8vqzxnk0' },
+      { fecha: '2024', titulo: 'En vivo 1', url: 'https://www.youtube.com/watch?v=Vv1eNEGSvJs' },
+      { fecha: '2024', titulo: 'Ensayo 1', url: 'https://www.youtube.com/watch?v=TQmdQs9aCKE&t=36s' },
+      { fecha: '2024', titulo: 'Short 2', url: 'https://www.youtube.com/shorts/mgstloaTLao' },
+      { fecha: '2024', titulo: 'Tema X', url: 'https://www.youtube.com/watch?v=7LW4G59Q2bQ' },
+      { fecha: '2024', titulo: 'Tema Y', url: 'https://www.youtube.com/watch?v=1EtHkTNSdJs' },
+      { fecha: '2024', titulo: 'Tema Z', url: 'https://www.youtube.com/watch?v=mnk2wBfEcv0' }
+    ];
+
+    const timeline = document.getElementById('timeline');
+    YT.forEach(item => {
+      const wrap = document.createElement('div');
+      wrap.className = 'relative mb-8';
+      wrap.innerHTML = `
+        <div class="absolute -left-[9px] mt-2 w-4 h-4 rounded-full bg-amber-400 border-2 border-slate-900"></div>
+        <div class="ml-4 grid md:grid-cols-2 gap-4">
+          <div>
+            <div class="text-amber-300 text-xs uppercase tracking-wide">${item.fecha}</div>
+            <h3 class="font-semibold">${item.titulo}</h3>
+            <a href="${item.url}" target="_blank" rel="noopener" class="text-sky-400 underline">Ver en YouTube</a>
+          </div>
+          <div>
+            <div class="relative rounded-lg overflow-hidden border border-slate-800 yt-thumb group">
+              <a href="${item.url}" target="_blank" rel="noopener" class="absolute inset-0 grid place-items-center">
+                <span class="px-3 py-1 rounded bg-black/70 text-white text-xs">▶ Reproducir en YouTube</span>
+              </a>
+              <img loading="lazy" class="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition" src="https://img.youtube.com/vi/VIDEO_ID/hqdefault.jpg" alt="Thumbnail" onload="this.src=this.src.replace('VIDEO_ID', obtenerId('${item.url}'))" />
+            </div>
+          </div>
+        </div>`;
+      timeline.appendChild(wrap);
+    });
+
+    function obtenerId(url){
+      const m = url.match(/v=([^&]+)/) || url.match(/shorts\/([^?]+)/);
+      return m ? m[1] : '';
+    }
+  </script>
 </body>
 </html>
